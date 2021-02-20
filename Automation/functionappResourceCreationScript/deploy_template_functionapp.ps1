@@ -44,15 +44,18 @@ param(
     [string]
     $templateFilePath
 )
-
+# Remove all Azure credientials 
 Clear-AzContext -Force;
 $securePassword = ConvertTo-SecureString -String $servicePrincipalPassword -AsPlainText -Force;
 $credentials = New-Object -TypeName System.Management.Automation.PSCredential($servicePrincipalId, $securePassword);
 
+# Connect to Azure with authentication
 Connect-AzAccount -Credential $credentials -ServicePrincipal -Tenant $tenantId -SubscriptionId $subscriptionId;
 
+# Creates Azure Resource Group
 New-AzResourceGroup -Name $resourceGroupName -Location $location
 
+# Adds Azure deployment to a resource 
 New-AzResourceGroupDeployment `
     -ResourceGroupName $resourceGroupName `
     -TemplateFile  $templateFilePath `
