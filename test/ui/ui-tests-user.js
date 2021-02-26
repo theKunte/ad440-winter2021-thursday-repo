@@ -2,11 +2,20 @@ const { link } = require("fs");
 const puppeteer = require("puppeteer");
 
 (async () => {
-    const usersLocation = "https://nscstrdevusw2thucommon.z5.web.core.windows.net/users";
+    const uiLocation = "https://nscstrdevusw2thucommon.z5.web.core.windows.net/";
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
-    await page.goto(usersLocation)
-    console.log(await page.title());
+    console.log(`Page opened, going to ${uiLocation}`);
+    await page.goto(uiLocation)
+
+    const [div] = await page.$x("//div[contains(., '/users')]");
+    await div.click();
+    // const [response] = await Promise.all([
+    //     page.waitForNavigation(),
+    //     div.click(),
+    // ]);
+
+    await page.screenshot({ path: "../results/ui-test-users-page-screenshot.png"});
 
     await browser.close();
 })();

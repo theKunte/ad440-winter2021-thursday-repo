@@ -29,4 +29,5 @@ jobs:
           pushd ${{ env.UI_TESTS_PATH }}
           npm install
           npm run test-users
+          popd
 
