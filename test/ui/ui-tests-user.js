@@ -15,7 +15,7 @@ const puppeteer = require("puppeteer");
     //     div.click(),
     // ]);
 
-    await page.screenshot({ path: "../results/ui-test-users-page-screenshot.png"});
+    await page.screenshot({ path: "../results/ui-test-results/ui-test-users-page-screenshot.png"});
 
     await browser.close();
 })();

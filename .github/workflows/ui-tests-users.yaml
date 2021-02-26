@@ -8,6 +8,8 @@ on:
 env:
   NODE_VERSION: '14'
   UI_TESTS_PATH: './test/ui'
+  UI_RESULTS_USERS_FILE_PATH: './test/results/ui-test-results/ui-test-users-page-screenshot.png'
+  UI_RESULTS_USERS_FILE_NAME: 'ui-test-users-page-screenshot.png'
 
 jobs:
   # Tentative title for the job
@@ -30,4 +32,14 @@ jobs:
           npm install
           npm run test-users
           popd
+      
+      - name: Upload to Azure storage
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+            az storage blob upload \
+              --conection-string ${{ secrets.BLOB_STORAGE_CONNECTION_STRING }} \
+              --file ${{ env.UI_RESULTS_USERS_FILE_PATH }} \
+              --container-name 'screenshots' \
+              --name ${{ env.UI_RESULTS_USERS_FILE_NAME }}
 
