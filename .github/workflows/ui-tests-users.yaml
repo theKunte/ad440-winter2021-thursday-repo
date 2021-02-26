@@ -7,6 +7,7 @@ on:
 
 env:
   NODE_VERSION: '14'
+  UI_TEST_PATH: './test/ui'
 
 jobs:
   # Tentative title for the job
@@ -22,4 +23,9 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           check-latest: true
+      
+      - name: npm install, build, and test
+        run: |
+          npm ci
+          npm test-users
 
