@@ -38,7 +38,7 @@ jobs:
         with:
           inlineScript: |
             az storage blob upload \
-              --conection-string ${{ secrets.BLOB_STORAGE_CONNECTION_STRING }} \
+              --connection-string ${{ secrets.BLOB_STORAGE_CONNECTION_STRING }} \
               --file ${{ env.UI_RESULTS_USERS_FILE_PATH }} \
               --container-name 'screenshots' \
               --name ${{ env.UI_RESULTS_USERS_FILE_NAME }}
