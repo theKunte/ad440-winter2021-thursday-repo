@@ -28,5 +28,5 @@ jobs:
         run: |
           pushd ${{ env.UI_TESTS_PATH }}
           npm install
-          npm test-users
+          npm run test-users
 
